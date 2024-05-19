@@ -7,7 +7,7 @@ const port = import.meta.env.VITE_PORT as string;
 
 const endpoint = `http://${edt}:${port}`;
 
-console.log(endpoint);
+console.error(endpoint);
 
 const ping = endpoint + '/ping';
 const enterLobbyById = endpoint + '/enter_lobby_by_id';
