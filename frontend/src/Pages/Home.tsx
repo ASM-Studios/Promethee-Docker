@@ -5,7 +5,7 @@ import { Box, Button, TextField, CardContent } from '@mui/material';
 // @ts-ignore
 import background from '../assets/HomeBackground.png';
 import UserContext from "../UserContext";
-import { enterLobbyById, instance } from "../routes";
+import { enterLobbyById, instance, endpoint } from "../routes";
 
 const Actions = () => {
     const { username, lobbyId, setUsername, setLobbyId, setPlayers, setLobbyCreator, setCards } = useContext(UserContext);
@@ -52,7 +52,7 @@ const Actions = () => {
                     </Box>
                     <Box sx={{ paddingBottom: 2 }}>
                         <TextField
-                            label="Identifiant de partie"
+                            label=endpoint
                             value={lobbyId}
                             onChange={(e) => {
                                 const newValue = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 5);
