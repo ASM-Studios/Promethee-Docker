@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // @ts-ignore
-const edt = import.meta.env.VITE_ENDPOINT as string;
+const edt = "127.0.0.1";
 // @ts-ignore
-const port = import.meta.env.VITE_PORT as string;
+const port = "5000";
 
 const endpoint = `http://${edt}:${port}`;
 
