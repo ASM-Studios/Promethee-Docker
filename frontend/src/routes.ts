@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // @ts-ignore
-const edt = "127.0.0.1";
+const edt = "0.0.0.0";
 // @ts-ignore
 const port = "5000";
 
