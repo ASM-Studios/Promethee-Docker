@@ -14,7 +14,7 @@ services:
       - "3000:3000"
     networks:
       - app-network
-    environment:
+    env_file:
       - stack.env
 
 networks:
