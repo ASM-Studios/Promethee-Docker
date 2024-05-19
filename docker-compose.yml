@@ -9,10 +9,7 @@ services:
       - app-network
 
   frontend:
-    build:
-      context: ./frontend
-      args:
-        - NODE_ENV=development
+    build: ./frontend
     ports:
       - "3000:3000"
     networks:

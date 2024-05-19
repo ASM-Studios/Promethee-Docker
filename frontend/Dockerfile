@@ -11,4 +11,4 @@ WORKDIR /docker
 COPY --from=builder /docker/dist ./dist
 RUN npm install -g serve
 EXPOSE 3000
-CMD ["serve", "-s", "dist"]
+CMD ["npm", "run", "dev"]
