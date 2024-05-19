@@ -52,7 +52,7 @@ const Actions = () => {
                     </Box>
                     <Box sx={{ paddingBottom: 2 }}>
                         <TextField
-                            label=endpoint
+                            label={endpoint}
                             value={lobbyId}
                             onChange={(e) => {
                                 const newValue = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 5);
