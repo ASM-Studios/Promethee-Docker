@@ -70,7 +70,7 @@ const Actions = () => {
                             onClick={launchGame}
                             disabled={ username === '' || lobbyId === '' || lobbyId.length != 5 }
                             style={{ color: 'white' }}
-                        >Lancer la patrie</Button>
+                        >Lancer la partie</Button>
                     </Box>
                     <Box sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }}>
                         <Link to="/rules" style={{ color: 'white', textDecoration: 'underline'}}>comment jouer ?</Link>
