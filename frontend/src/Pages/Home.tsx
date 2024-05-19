@@ -99,7 +99,7 @@ const Home = () => {
             }} />
             <Box sx={{ height: '100%', width: '100%', position: 'relative' }}>
                 <Actions/>
-                <h1>{endpoint}</h1>
+                <h1>{endpoint}zdvgfazrar</h1>
             </Box>
         </div>
     );
