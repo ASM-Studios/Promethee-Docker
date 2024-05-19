@@ -14,8 +14,10 @@ services:
       - "3000:3000"
     networks:
       - app-network
-    env_file:
-      - stack.env
+    environment:
+      - VITE_ENDPOINT=${VITE_ENDPOINT}
+      - VITE_PORT=${VITE_PORT}
+      - VITE_REFRESH_INTERVAL=${VITE_REFRESH_INTERVAL}
 
 networks:
   app-network:
