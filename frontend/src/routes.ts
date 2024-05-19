@@ -7,6 +7,8 @@ const port = import.meta.env.VITE_PORT as string;
 
 const endpoint = `http://${edt}:${port}`;
 
+console.error(edt);
+console.error(port);
 console.error(endpoint);
 
 const ping = endpoint + '/ping';
