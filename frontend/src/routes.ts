@@ -1,13 +1,16 @@
 import axios from 'axios';
 
+// // @ts-ignore
+// const edt = import.meta.env.VITE_ENDPOINT as string;
+// // @ts-ignore
+// const port = import.meta.env.VITE_PORT as string;
+
 // @ts-ignore
-const edt = import.meta.env.VITE_ENDPOINT as string;
+const edt = "localhost";
 // @ts-ignore
-const port = import.meta.env.VITE_PORT as string;
+const port = "5000";
 
 const endpoint = `http://${edt}:${port}`;
-
-console.error(endpoint);
 
 const ping = endpoint + '/ping';
 const enterLobbyById = endpoint + '/enter_lobby_by_id';
