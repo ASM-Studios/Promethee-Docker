@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
 
+from routes.routes import routes
+
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}})
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = '*'
+app.register_blueprint(routes)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5000)
