@@ -1,27 +1,19 @@
 import { Box, Typography, Button, Modal, Slider } from '@mui/material';
-// @ts-ignore
-import background from '../assets/HomeBackground.png';
-// @ts-ignore
-import deck from '../assets/deck.png';
-// @ts-ignore
-import board from '../assets/board.png';
 import UserContext from "../UserContext";
-// @ts-ignore
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import * as React from "react";
 import { instance, draw, update, playCard, endOfTurn, questionUrl } from "../routes";
-// @ts-ignore
+
+import background from '../assets/HomeBackground.png';
+import deck from '../assets/deck.png';
+import board from '../assets/board.png';
 import card_1 from '../assets/card_1.png';
-// @ts-ignore
 import card_2 from '../assets/card_2.png';
-// @ts-ignore
 import card_3 from '../assets/card_3.png';
-// @ts-ignore
 import card_4 from '../assets/card_4.png';
-// @ts-ignore
 import card_5 from '../assets/card_5.png';
-// @ts-ignore
 import card_6 from '../assets/card_6.png';
 
+const { useContext, useEffect, useState, useCallback } = React;
 const cardsImages = [card_1, card_2, card_3, card_4, card_5, card_6];
 
 const getRandomColor = () => {
@@ -31,7 +23,25 @@ const getRandomColor = () => {
     return `rgb(${r}, ${g}, ${b})`;
 };
 
-const CardsButtons = React.memo(({ currentPlayer, focusedCard, asGamble, setCards, cards, setFocusedCard, endTurn, lobbyId, username, target, setQuestion, setIsQuestion, setSliderValue, asDraw, setAsDraw }) => {
+interface CardsButtonsProps {
+  currentPlayer: string;
+  focusedCard: number;
+  asGamble: boolean;
+  setCards: (cards: any[]) => void; // Replace any with the actual type of the cards
+  cards: any[]; // Replace any with the actual type of the cards
+  setFocusedCard: (index: number) => void;
+  endTurn: () => void;
+  lobbyId: string;
+  username: string;
+  target: string;
+  setQuestion: (question: any) => void; // Replace any with the actual type of the question
+  setIsQuestion: (isQuestion: boolean) => void;
+  setSliderValue: (value: number) => void;
+  asDraw: boolean;
+  setAsDraw: (asDraw: boolean) => void;
+}
+
+const CardsButtons = React.memo(({ currentPlayer, focusedCard, asGamble, setCards, cards, setFocusedCard, endTurn, lobbyId, username, target, setQuestion, setIsQuestion, setSliderValue, asDraw, setAsDraw }: CardsButtonsProps) => {
 
     const discard = () => {
         setCards(cards.filter((_, index) => index !== focusedCard));
@@ -107,20 +117,20 @@ const CardsButtons = React.memo(({ currentPlayer, focusedCard, asGamble, setCard
                     variant="contained"
                     sx={{ flex: 1 }}
                     onClick={ playCardF }
-                    disabled={ currentPlayer !== username || focusedCard == -1 }
+                    disabled={ currentPlayer !== username || focusedCard === -1 }
                 >Jouer</Button>
                 <Button
                     variant="contained"
                     sx={{ flex: 1 }}
                     onClick={ drawCard }
-                    disabled={ currentPlayer !== username || focusedCard == -1 || asDraw }
+                    disabled={ currentPlayer !== username || focusedCard === -1 || asDraw }
                 >Défausser</Button>
             </Box>
             <Button
                 variant="contained"
                 sx={{ width: '100%' }}
                 onClick={ gamble }
-                disabled={ asGamble || (currentPlayer !== username || focusedCard == -1) }
+                disabled={ asGamble || (currentPlayer !== username || focusedCard === -1) }
             >Parier</Button>
             <Button
                 variant="contained"
@@ -136,9 +146,11 @@ const Game = () => {
     const {
         username,
         lobbyId,
-        players, setPlayers,
+        players,
+        setPlayers,
         lobbyCreator,
-        cards, setCards
+        cards,
+        setCards
     } = useContext(UserContext);
     const [currentPlayer, setCurrentPlayer] = useState(lobbyCreator);
     const [focusedCard, setFocusedCard] = useState(-1);
@@ -168,7 +180,7 @@ const Game = () => {
     }, [lobbyId, setPlayers]);
 
     useEffect(() => {
-        const interval = setInterval(updatePlayers, (import.meta.env.VITE_REFRESH_INTERVAL) || 10000);
+        const interval = setInterval(updatePlayers, Number(process.env.REFRESH_INTERVAL) || 10000);
 
         return () => clearInterval(interval);
     }, [updatePlayers]);
@@ -282,13 +294,18 @@ const Game = () => {
         setIsQuestion(false);
     };
 
-    const hasPlayerGamble = (players: { [key: string]: number; }, username: string) => {
-        // @ts-ignore
+    interface Player {
+        username: string;
+        asGamble: boolean;
+    }
+
+    const hasPlayerGamble = (players: Player[], username: string): boolean => {
         for (const player of players) {
             if (player.username === username) {
                 return player.asGamble;
             }
         }
+        return false;
     }
 
     const GameLayout = () => {
@@ -369,7 +386,7 @@ const Game = () => {
                         height: '100%',
                         position: 'relative',
                     }}>
-                        {players.map(({username, life}, index) => {
+                        {players.map(({username, life}, index: number) => {
                             const rotation = (360 / players.length) * index;
 
                             return (
@@ -427,7 +444,7 @@ const Game = () => {
                             aria-label="Question slider"
                             defaultValue={question.min}
                             value={sliderValue}
-                            onChangeCommitted={(event, newValue) => setSliderValue(newValue)}
+                            onChangeCommitted={(event, newValue) => setSliderValue(newValue as number)}
                             valueLabelDisplay="auto"
                             step={1}
                             min={question.min}

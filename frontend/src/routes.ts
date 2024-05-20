@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// @ts-ignore
-const edt = "localhost";
-// @ts-ignore
-const port = "5000";
+const edt = process.env.REACT_APP_BACKEND_IP;
+const port = process.env.REACT_APP_BACKEND_PORT;
 
 const endpoint = `http://${edt}:${port}`;
 

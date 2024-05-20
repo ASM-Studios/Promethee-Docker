@@ -1,14 +1,12 @@
-// @ts-ignore
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, TextField, CardContent } from '@mui/material';
-// @ts-ignore
 import background from '../assets/HomeBackground.png';
 import UserContext from "../UserContext";
-import { enterLobbyById, instance, endpoint } from "../routes";
+import { enterLobbyById, instance } from "../routes";
 
 const Actions = () => {
-    const { username, lobbyId, setUsername, setLobbyId, setPlayers, setLobbyCreator, setCards } = useContext(UserContext);
+    const { username, lobbyId, setUsername, setLobbyId, setPlayers, setLobbyCreator } = useContext(UserContext);
 
     const launchGame = () => {
         if (username === '')
@@ -68,7 +66,7 @@ const Actions = () => {
                             variant="contained"
                             fullWidth
                             onClick={launchGame}
-                            disabled={ username === '' || lobbyId === '' || lobbyId.length != 5 }
+                            disabled={ username === '' || lobbyId === '' || lobbyId.length !== 5 }
                             style={{ color: 'white' }}
                         >Lancer la partie</Button>
                     </Box>

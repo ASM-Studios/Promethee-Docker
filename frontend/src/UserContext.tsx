@@ -1,12 +1,18 @@
 import { createContext } from 'react';
 
+interface Player {
+    username: string;
+    life: number;
+    asGamble: boolean;
+}
+
 type UserContextType = {
     username: string;
     setUsername: (value: string) => void;
     lobbyId: string;
     setLobbyId: (value: string) => void;
-    players: { [key: string]: number }; // Updated players type
-    setPlayers: (value: { [key: string]: number }) => void; // Updated setPlayers type
+    players: Player[]; // Updated players type
+    setPlayers: (value: Player[]) => void; // Updated setPlayers type
     lobbyCreator: string;
     setLobbyCreator: (value: string) => void;
     cards: string[];
@@ -18,7 +24,7 @@ const UserContext = createContext<UserContextType>({
     setUsername: () => {},
     lobbyId: '',
     setLobbyId: () => {},
-    players: {},
+    players: [],
     setPlayers: () => {},
     lobbyCreator: '',
     setLobbyCreator: () => {},

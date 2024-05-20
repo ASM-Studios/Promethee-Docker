@@ -119,8 +119,9 @@ const Rules = () => {
         ])
     ];
 
+    const history = window.history;
     const [autoScroll, setAutoScroll] = useState(false);
-    const gameCardsRef = useRef(null);
+    const gameCardsRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
