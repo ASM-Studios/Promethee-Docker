@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
-from lobby.LobbyManager import lobby_manager
+from flask_cors import CORS
+from backend.lobby.LobbyManager import lobby_manager
 
 EOT_routes = Blueprint('EOT_routes', __name__)
-
+CORS(EOT_routes)  # Enable CORS for this sub-blueprint
 
 @EOT_routes.route('/end_of_turn', methods=['PUT'])
 def end_of_turn():
@@ -17,4 +18,3 @@ def end_of_turn():
     return jsonify({
         "username": player.getName()
     })
-

@@ -1,9 +1,11 @@
 from flask import Blueprint, jsonify, request
-from lobby.Player import Player
-from lobby.LobbyManager import lobby_manager
+from backend.lobby.Player import Player
+from backend.lobby.LobbyManager import lobby_manager
 import sys
+from flask_cors import CORS
 
 enter_lobby_by_id_routes = Blueprint('enter_lobby_by_id', __name__)
+CORS(enter_lobby_by_id_routes)  # Enable CORS for this sub-blueprint
 
 @enter_lobby_by_id_routes.route('/enter_lobby_by_id', methods=['POST'])
 def enter_lobby_by_id():

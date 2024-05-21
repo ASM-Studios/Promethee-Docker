@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
-from lobby.LobbyManager import lobby_manager
+from flask_cors import CORS
+from backend.lobby.LobbyManager import lobby_manager
 
 update_routes = Blueprint('update_routes', __name__)
-
+CORS(update_routes)  # Enable CORS for this sub-blueprint
 
 @update_routes.route('/update', methods=['PUT'])
 def update():

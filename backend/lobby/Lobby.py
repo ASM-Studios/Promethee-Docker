@@ -1,6 +1,4 @@
-from . import *
-from lobby.Player import Player
-
+from .Player import Player
 
 class Lobby:
     class LobbyFull(Exception):

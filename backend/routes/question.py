@@ -1,11 +1,11 @@
 import random
-
 from flask import Blueprint, jsonify, request
-
-from lobby import questions
-from lobby.LobbyManager import lobby_manager
+from flask_cors import CORS
+from backend.lobby import questions
+from backend.lobby.LobbyManager import lobby_manager
 
 question_routes = Blueprint('questions', __name__)
+CORS(question_routes)  # Enable CORS for this sub-blueprint
 
 @question_routes.route('/question', methods=['PUT'])
 def choose_question():

@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, request
-from lobby import lobby_manager
+from flask_cors import CORS
+from backend.lobby.LobbyManager import lobby_manager
 
 play_card_routes = Blueprint('play_card', __name__)
+CORS(play_card_routes)  # Enable CORS for this sub-blueprint
 
 @play_card_routes.route('/play_card', methods=['POST'])
 def play_card():
